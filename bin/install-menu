@@ -1,0 +1,90 @@
+#!/usr/bin/env bash
+
+pacman_menu() {
+    kitty-tui bash -c '
+        package=$(pacman -Slq | fzf \
+            --prompt="Pacman > " \
+            --height=100% \
+            --layout=reverse \
+            --border \
+            --header="Select a package to install")
+
+        [[ -z "$package" ]] && exit 0
+
+        sudo pacman -S "$package"
+
+        echo
+        echo "Press Enter to close..."
+        read
+    '
+}
+
+aur_menu() {
+    kitty-tui bash -c '
+        package=$(yay -Slq | fzf \
+            --prompt="AUR > " \
+            --height=100% \
+            --layout=reverse \
+            --border \
+            --header="Select an AUR package to install")
+
+        [[ -z "$package" ]] && exit 0
+
+        yay -S "$package"
+
+        echo
+        echo "Press Enter to close..."
+        read
+    '
+}
+
+uninstall_menu() {
+    kitty-tui bash -c '
+        package=$(pacman -Qq | fzf \
+            --prompt="Uninstall > " \
+            --height=100% \
+            --layout=reverse \
+            --border \
+            --header="Select an installed package to uninstall")
+
+        [[ -z "$package" ]] && exit 0
+
+        sudo pacman -Rns "$package"
+
+        echo
+        echo "Press Enter to close..."
+        read
+    '
+}
+
+update_system() {
+    kitty-tui bash -c '
+        yay -Syu
+
+        echo
+        echo "Press Enter to close..."
+        read
+    '
+}
+
+options="󰏖  Pacman
+󰣔  AUR
+󰆴  Uninstall
+󰚰  Update"
+
+choice=$(printf '%s\n' "$options" | walker --dmenu -p "Install")
+
+case "$choice" in
+    *Pacman*)
+        pacman_menu
+        ;;
+    *AUR*)
+        aur_menu
+        ;;
+    *Uninstall*)
+        uninstall_menu
+        ;;
+    *Update*)
+        update_system
+        ;;
+esac

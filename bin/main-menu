@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+options="  Power
+󰀻  Apps
+⏲  Trigger
+󰒓  Install"
+
+choice=$(printf '%s\n' "$options" | walker --dmenu -p "Menu")
+
+case "$choice" in
+    *Power*)
+        power-menu
+        ;;
+    *Apps*)
+        walker
+        ;;
+    *Trigger*)
+        trigger-menu
+        ;;
+    *Install*)
+        install-menu
+        ;;
+esac

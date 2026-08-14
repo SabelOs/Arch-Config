@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+DEVICE="microsoft-surface-type-cover-touchpad"
+STATE_FILE="${XDG_RUNTIME_DIR}/hypr-trackpad-state"
+
+if [[ ! -f "$STATE_FILE" ]]; then
+    # Your Hyprland config starts the trackpad disabled
+    echo "false" > "$STATE_FILE"
+fi
+
+STATE=$(cat "$STATE_FILE")
+
+if [[ "$STATE" == "true" ]]; then
+    hyprctl eval 'hl.device({
+        name = "microsoft-surface-type-cover-touchpad",
+        enabled = false
+    })'
+
+    echo "false" > "$STATE_FILE"
+    notify-send "Trackpad" "Disabled"
+else
+    hyprctl eval 'hl.device({
+        name = "microsoft-surface-type-cover-touchpad",
+        enabled = true
+    })'
+
+    echo "true" > "$STATE_FILE"
+    notify-send "Trackpad" "Enabled"
+fi

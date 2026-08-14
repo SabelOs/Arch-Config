@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+STATE_FILE="${XDG_RUNTIME_DIR}/hypr-idle-disabled"
+
+if [[ -f "$STATE_FILE" ]]; then
+    rm "$STATE_FILE"
+    notify-send "Idle" "Automatic suspend enabled"
+else
+    touch "$STATE_FILE"
+    notify-send "Idle" "Automatic suspend disabled"
+fi

@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+launcher="walker"
+launcher_opts="--dmenu -p Media"
+if ! command -v "$launcher" >/dev/null 2>&1; then
+  if command -v dmenu >/dev/null 2>&1; then
+    launcher="dmenu"
+  else
+    echo "walker or dmenu not found" >&2
+    exit 1
+  fi
+fi
+
+options="  YouTube\n  WhatsApp\n󰭹  Reddit\n  GitHub"
+choice=$(printf "%b" "$options" | $launcher $launcher_opts)
+
+case "$choice" in
+  *YouTube*) firefox --new-window https://youtube.com ;;
+  *WhatsApp*) firefox --new-window https://web.whatsapp.com ;;
+  *Reddit*) firefox --new-window https://reddit.com ;;
+  *GitHub*) firefox --new-window https://github.com ;;
+esac

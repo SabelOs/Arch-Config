@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+launcher="walker"
+launcher_opts="--dmenu -p Nix"
+if ! command -v "$launcher" >/dev/null 2>&1; then
+  if command -v dmenu >/dev/null 2>&1; then
+    launcher="dmenu"
+  else
+    echo "walker or dmenu not found" >&2
+    exit 1
+  fi
+fi
+
+options="󰒓  Test\n󰑓  Switch\n󰍉  Search"
+choice=$(printf "%b" "$options" | $launcher $launcher_opts)
+
+case "$choice" in
+  *Test*)
+    kitty -e bash -c "sudo nixos-rebuild test --flake .#soekeHypr || read"
+    ;;
+  *Switch*)
+    kitty -e bash -c "sudo nixos-rebuild switch --flake .#soekeHypr || read"
+    ;;
+  *Search*)
+    kitty -e nix search nixpkgs
+    ;;
+esac

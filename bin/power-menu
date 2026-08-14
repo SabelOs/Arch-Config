@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+options="󰐥  Shutdown
+󰒲  Suspend
+  Lock
+󰜉  Restart"
+
+choice=$(printf '%s\n' "$options" | walker --dmenu -p "System")
+
+case "$choice" in
+    *Shutdown*)
+        hyprshutdown -t 'Shutting down...' --post-cmd 'shutdown -P 0'
+        ;;
+    *Suspend*)
+        systemctl suspend
+        ;;
+    *Restart*)
+        hyprshutdown -t 'Restarting...' --post-cmd 'reboot'
+        ;;
+    *Lock*)
+        pidof hyprlock || hyprlock
+        ;;
+esac

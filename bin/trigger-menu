@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+screenshot() {
+    geometry=$(hyprctl activewindow -j | jq -r '"\(.at[0]),\(.at[1]) \(.size[0])x\(.size[1])"')
+
+    grim -g "$geometry" - | wl-copy
+}
+
+screen_cutout() {
+    grim -g "$(slurp)" - | wl-copy
+}
+
+options="󰾆  Toggle Idle
+󰄀  Screenshot
+󰍉  Screen Cutout"
+
+choice=$(printf '%s\n' "$options" | walker --dmenu -p "Triggers")
+
+case "$choice" in
+    *"Toggle Idle"*)
+        toggle-idle
+        ;;
+    *"Screenshot"*)
+        screenshot
+        ;;
+    *"Screen Cutout"*)
+        screen_cutout
+        ;;
+esac

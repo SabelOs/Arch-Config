@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+exec kitty \
+    --class waybar-tui \
+    --override confirm_os_window_close=0 \
+    "$@"
+
+sleep 0.1
+
+hyprctl dispatch focuswindow "class:^(waybar-tui)$"
