@@ -3,7 +3,7 @@ local dotfiles = home .. "/Arch-Config"
 
 package.path =
     dotfiles .. "/hypr/?.lua;" ..
-    dotfiles .. "/hosts/surface/?.lua;" ..
+    dotfiles .. "/hosts/soeke-RED/?.lua;" ..
     package.path
 
 require("env-variables")
