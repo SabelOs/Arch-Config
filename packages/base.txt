@@ -3,9 +3,26 @@ hyprland
 hypridle
 hyprlock
 hyprpaper
+hyprshutdown
+
+#main apps
+nautilus
+udiskie
+code
+nano
+dunst
+libnotify
+network-manager-applet
 
 #TUI
+wiremix
+btop
+bluetui
+impala
+calcurse
 
+#Audio
+pavucontrol
 
 # Bar
 waybar
