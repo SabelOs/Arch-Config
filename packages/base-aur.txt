@@ -1,0 +1,5 @@
+#walker
+walker-bin
+elephant-bin
+elephant-desktopapplications
+elephant-providerlist

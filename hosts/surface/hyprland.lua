@@ -1,3 +1,21 @@
+local home = os.getenv("HOME")
+local dotfiles = home .. "/Arch-Config"
+
+package.path =
+    dotfiles .. "/hypr/?.lua;" ..
+    dotfiles .. "/hosts/surface/?.lua;" ..
+    package.path
+
+require("env-variables")
+require("autostart")
+require("lookandfeel")
+require("input")
+require("keybinds")
+require("windowrules")
+require("monitors")
+
+--[[ Old manual config file
+
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 -- HYPRLAND CONFIG FOR CACHYOS                        --
 -- Migrated from NixOS Hyprland configuration          --
@@ -27,13 +45,6 @@ hl.monitor({
     scale    = "1",
 })
 
----------------------
----- MY PROGRAMS ----
----------------------
-
-local terminal    = "kitty"
-local fileManager = "nautilus"
-local menu        = "main-menu"
 
 -------------------
 ---- AUTOSTART ----
@@ -58,11 +69,7 @@ end)
 hl.env("XCURSOR_SIZE", "24")
 hl.env("HYPRCURSOR_SIZE", "24")
 hl.env("PATH", os.getenv("HOME") .. "/.local/bin:" .. os.getenv("PATH"))
------------------------
------ PERMISSIONS -----
------------------------
 
--- Add permission rules here if needed for screen capture or plugins.
 
 -----------------------
 ---- LOOK AND FEEL ----
@@ -298,3 +305,5 @@ hl.window_rule({
     center = true,
     size = "900 650",
 })
+
+--]]

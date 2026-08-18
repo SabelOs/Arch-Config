@@ -1,0 +1,170 @@
+@define-color bg0 #0d0b0b;
+@define-color bg-hover #3c3836;
+@define-color numbers-inactive #C9CCDE;
+@define-color fg0 #E9E8EF;
+
+
+/* ============================================================
+   GLOBAL
+   ============================================================ */
+
+* {
+    border: none;
+    border-radius: 0;
+    font-family: "Rubik", "JetBrainsMono Nerd Font", "Noto Sans CJK JP", "Noto Sans CJK KR";
+    font-size: 16px;
+    min-height: 0;
+    padding: 0;
+    margin: 0;
+}
+
+
+/* ============================================================
+   WAYBAR
+   ============================================================ */
+
+window#waybar {
+    background: transparent;
+}
+
+.modules-center {
+    background: @bg0;
+    padding: 6px 12px;
+    border-radius: 28px;
+    min-width: 0;
+}
+
+
+/* ============================================================
+   POWER
+   ============================================================ */
+
+#custom-power {
+    color: @fg0;
+    font-size: 18px;
+
+    min-width: 22px;
+    padding: 2px 4px;
+
+    /* Very small separation from workspaces */
+    margin-right: 3px;
+}
+
+#custom-power:hover {
+    background-color: #fb4934;
+    color: #1d2021;
+    border-radius: 12px;
+    padding: 2px 4px;
+}
+
+
+/* ============================================================
+   WORKSPACES
+   ============================================================ */
+
+#workspaces {
+    background: transparent;
+
+    /* Small separation around workspace group */
+    margin: 0 2px;
+
+    padding: 0;
+
+    border: none;
+    box-shadow: none;
+}
+
+#workspaces button {
+    color: @numbers-inactive;
+    background: transparent;
+
+    /* Keep the workspace spacing you liked */
+    padding: 0 6px;
+    margin: 0 2px;
+
+    border-radius: 16px;
+
+    transition: all 0.3s ease-in-out;
+}
+
+#workspaces button.active {
+    background: linear-gradient(
+        135deg,
+        @fg0 0%,
+        #88c0d0 50%,
+        #13345c 100%
+    );
+
+    color: @bg-hover;
+
+    min-width: 40px;
+
+    transition: all 0.3s ease-in-out;
+}
+
+#workspaces button:hover {
+    background-color: @bg0;
+    color: @fg0;
+}
+
+#workspaces button.urgent {
+    background-color: #fb4934;
+    color: @bg-hover;
+}
+
+
+/* ============================================================
+   CLOCK
+   ============================================================ */
+
+#clock {
+    color: @fg0;
+
+    /* Almost no extra spacing */
+    padding: 0 3px;
+    margin: 0 2px;
+}
+
+
+/* ============================================================
+   SYSTEM ICONS
+   ============================================================ */
+
+#bluetooth,
+#network,
+#pulseaudio,
+#cpu,
+#battery {
+    color: @fg0;
+    font-size: 18px;
+
+    min-width: 18px;
+    padding: 2px 4px;
+
+    /* Tight spacing between icons */
+    margin: 0 1px;
+}
+
+
+/* ============================================================
+   TRAY
+   ============================================================ */
+
+#tray {
+    color: @fg0;
+
+    min-width: 0;
+    padding: 0 2px;
+
+    /* Keep tray close to battery */
+    margin-left: 2px;
+}
+
+#tray > widget {
+    color: @fg0;
+    margin: 0 3px;
+}
+
+#tray image {
+    color: @fg0;
+}

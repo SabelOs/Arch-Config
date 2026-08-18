@@ -1,0 +1,19 @@
+# Hyprland
+hyprland
+hypridle
+hyprlock
+hyprpaper
+
+#TUI
+
+
+# Bar
+waybar
+
+# Terminal
+kitty
+
+# Screenshots
+grim
+slurp
+wl-clipboard
