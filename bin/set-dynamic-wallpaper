@@ -1,0 +1,78 @@
+#!/usr/bin/env bash
+
+set -u
+
+WALLPAPER_DIR="/home/soeke/Arch-Config/wallpaper/dynamic"
+
+# Empty means all monitors. For a specific monitor, use e.g. "DP-1".
+MONITOR=""
+
+STATE_FILE="${XDG_RUNTIME_DIR:-/tmp}/dynamic-hyprpaper-current"
+
+# An unmatched glob should expand to nothing.
+shopt -s nullglob
+
+CANDIDATES=("$WALLPAPER_DIR"/frame-*)
+FRAMES=()
+
+# Include only regular files whose names contain a number directly after
+# "frame-". Examples: frame-1.jpg, frame-02.png, frame-123.webp
+for FILE in "${CANDIDATES[@]}"; do
+    BASENAME="${FILE##*/}"
+
+    if [[ -f "$FILE" && "$BASENAME" =~ ^frame-([0-9]+) ]]; then
+        FRAMES+=("$FILE")
+    fi
+done
+
+if (( ${#FRAMES[@]} == 0 )); then
+    echo "No files named frame-NUMBER* found in: $WALLPAPER_DIR" >&2
+    exit 1
+fi
+
+# Version sorting orders numeric names correctly:
+# frame-1, frame-2, frame-9, frame-10, frame-11 ...
+mapfile -d '' -t FRAMES < <(
+    printf '%s\0' "${FRAMES[@]}" | sort -zV
+)
+
+FRAME_COUNT=${#FRAMES[@]}
+
+# Minutes elapsed since midnight.
+HOUR=$((10#$(date +%H)))
+MINUTE=$((10#$(date +%M)))
+MINUTES_SINCE_MIDNIGHT=$((HOUR * 60 + MINUTE))
+
+# Select a frame by distributing all discovered frames evenly over 24 hours.
+INDEX=$((MINUTES_SINCE_MIDNIGHT * FRAME_COUNT / 1440))
+WALLPAPER="${FRAMES[$INDEX]}"
+
+# Include the Hyprpaper PID in the state. This ensures that the wallpaper is
+# applied again if Hyprpaper has been restarted.
+HYPRPAPER_PID="$(pgrep -n -x hyprpaper || true)"
+
+if [[ -z "$HYPRPAPER_PID" ]]; then
+    echo "Hyprpaper is not running." >&2
+    exit 1
+fi
+
+CURRENT_STATE="${HYPRPAPER_PID}:${MONITOR}:${WALLPAPER}"
+
+# Avoid sending the same wallpaper request every minute.
+if [[ -f "$STATE_FILE" ]] &&
+   [[ "$(<"$STATE_FILE")" == "$CURRENT_STATE" ]]; then
+    exit 0
+fi
+
+echo "Date/time:  $(date '+%F %T')"
+echo "Frames:     $FRAME_COUNT"
+echo "Selection:  $((INDEX + 1))/$FRAME_COUNT"
+echo "Wallpaper:  $WALLPAPER"
+echo "Monitor:    ${MONITOR:-all}"
+
+if hyprctl hyprpaper wallpaper "$MONITOR,$WALLPAPER"; then
+    printf '%s\n' "$CURRENT_STATE" > "$STATE_FILE"
+else
+    echo "Failed to change the wallpaper using Hyprpaper." >&2
+    exit 1
+fi

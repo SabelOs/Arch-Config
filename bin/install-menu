@@ -21,7 +21,7 @@ pacman_menu() {
 
 aur_menu() {
     kitty-tui bash -c '
-        package=$(yay -Slq | fzf \
+        package=$(paru -Slq | fzf \
             --prompt="AUR > " \
             --height=100% \
             --layout=reverse \

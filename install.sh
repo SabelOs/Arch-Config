@@ -211,6 +211,11 @@ install_packages "$DOTFILES/packages/base.txt"
 install_packages "$DOTFILES/packages/$HOST.txt"
 install_aur_packages "$DOTFILES/packages/base-aur.txt"
 install_aur_packages "$DOTFILES/packages/$HOST-aur.txt"
+
+#enable elephant as a service for walker
+systemctl --user enable elephant
+systemctl --user start elephant
+
 # ------------------------------------------------------------
 # CREATE CONFIG DIRECTORIES
 # ------------------------------------------------------------

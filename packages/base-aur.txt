@@ -1,6 +1,6 @@
 #walker
-walker-bin
-elephant-bin
+walker
+elephant
 elephant-desktopapplications
 elephant-providerlist
 
