@@ -144,6 +144,48 @@ link_file() {
 }
 
 # ------------------------------------------------------------
+# INSTALL PARU
+# ------------------------------------------------------------
+
+install_paru() {
+    local paru_dir="$DOTFILES/paru"
+    local paru_repo="https://aur.archlinux.org/paru.git"
+
+    # Already installed -> nothing to do
+    if command -v paru >/dev/null 2>&1; then
+        echo "paru is already installed:"
+        echo "  $(command -v paru)"
+        return
+    fi
+
+    echo
+    echo "Installing paru..."
+
+    # Clone paru into the dotfiles repository
+    if [[ ! -d "$paru_dir" ]]; then
+        echo "Cloning paru repository..."
+        git clone "$paru_repo" "$paru_dir"
+    else
+        echo "paru repository already exists:"
+        echo "  $paru_dir"
+
+        echo "Updating paru repository..."
+        git -C "$paru_dir" pull
+    fi
+
+    # Build and install paru
+    echo "Building paru..."
+
+    (
+        cd "$paru_dir"
+        makepkg -si --noconfirm
+    )
+
+    echo
+    echo "paru installation complete."
+}
+
+# ------------------------------------------------------------
 # PACKAGE INSTALLATION
 # ------------------------------------------------------------
 
