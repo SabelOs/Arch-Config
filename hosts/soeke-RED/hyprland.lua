@@ -14,6 +14,9 @@ require("keybinds")
 require("windowrules")
 require("monitors")
 
+--additional binds:
+hl.bind("SUPER" .. " + SHIFT + Y", hl.dsp.exec_cmd("firefox --new-tab https://www.youtube.com/"))
+
 --[[ Old manual config file
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
