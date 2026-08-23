@@ -16,8 +16,8 @@ options="  Bluetooth\n󰍛  btop\n󰄛  Calcurse\n󰀻  Audio Mixer"
 choice=$(printf "%b" "$options" | $launcher $launcher_opts)
 
 case "$choice" in
-  *Bluetooth*) kitty -e bluetui ;;
-  *btop*) kitty -e btop ;;
-  *Calcurse*) kitty -e calcurse ;;
-  *Audio*) kitty -e wiremix ;;
+  *Bluetooth*) kitty-tui -e bluetui ;;
+  *btop*) kitty-tui -e btop ;;
+  *Calcurse*) kitty-tui -e calcurse ;;
+  *Audio*) kitty-tui -e wiremix ;;
 esac
