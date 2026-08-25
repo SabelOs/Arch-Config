@@ -59,7 +59,8 @@ uninstall_menu() {
 
 update_system() {
     kitty-tui bash -c '
-        yay -Syu
+        sudo pacman -Syu
+        paru -Syu
 
         echo
         echo "Press Enter to close..."

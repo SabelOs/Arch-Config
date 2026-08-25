@@ -21,6 +21,11 @@ hl.bind(mainMod .. " + T", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
 hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit"))
 
+hl.bind("CTRL + ALT + B", hl.dsp.exec_cmd("kitty-tui -e bluetui"))
+hl.bind("CTRL + ALT + P", hl.dsp.exec_cmd("kitty-tui -e btop"))
+hl.bind("CTRL + ALT + A", hl.dsp.exec_cmd("kitty-tui -e wiremix"))
+hl.bind("CTRL + ALT + C", hl.dsp.exec_cmd("kitty-tui -e calcurse"))
+
 hl.bind(mainMod .. " + LEFT",  hl.dsp.focus({ direction = "left" }))
 hl.bind(mainMod .. " + RIGHT", hl.dsp.focus({ direction = "right" }))
 hl.bind(mainMod .. " + UP",    hl.dsp.focus({ direction = "up" }))
