@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Making a Dynamic Wallpaper from .heic file.md",
+                "file": "HIbernation-Setup-Limine-Btrfs.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Making a Dynamic Wallpaper from .heic file"
+              "title": "HIbernation-Setup-Limine-Btrfs"
             }
           },
           {
@@ -235,8 +235,8 @@
   },
   "active": "4bb7a87c5e66771a",
   "lastOpenFiles": [
-    "Setup of Elephant + Walker.md",
     "Making a Dynamic Wallpaper from .heic file.md",
+    "Setup of Elephant + Walker.md",
     "Willkommen.md"
   ]
 }

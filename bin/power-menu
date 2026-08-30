@@ -2,6 +2,7 @@
 
 options="󰐥  Shutdown
 󰒲  Suspend
+󰋊  Hibernate
   Lock
 󰜉  Restart"
 
@@ -13,6 +14,9 @@ case "$choice" in
         ;;
     *Suspend*)
         systemctl suspend
+        ;;
+    *Hibernate*)
+        systemctl hibernate
         ;;
     *Restart*)
         hyprshutdown -t 'Restarting...' --post-cmd 'reboot'
