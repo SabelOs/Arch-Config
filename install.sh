@@ -356,18 +356,18 @@ echo
 echo "Configuring Fish PATH..."
 
 if command -v fish >/dev/null 2>&1; then
-
-    fish -c "fish_add_path '$DOTFILES/bin'"
-
-    echo "Added to Fish PATH:"
-    echo "  $DOTFILES/bin"
-
+    # Use || true to prevent script exit on fish_add_path failure
+    if fish -c "fish_add_path '$DOTFILES/bin'" 2>/dev/null; then
+        echo "Added to Fish PATH:"
+        echo "  $DOTFILES/bin"
+    else
+        echo "WARNING: Failed to add to Fish PATH (but continuing)."
+        echo "         You can manually run: fish_add_path '$DOTFILES/bin'"
+    fi
 else
-
     echo "WARNING: Fish is not installed."
     echo "         Skipping Fish PATH configuration."
 fi
-
 
 # ------------------------------------------------------------
 # SUMMARY
@@ -406,3 +406,6 @@ echo
 echo "Executables:"
 echo "  $DOTFILES/bin/"
 echo
+# Save the selected host for future use
+echo "$HOST" > "$HOME/.config/hypr/.host"
+echo "Saved host '$HOST' to $HOME/.config/hypr/.host"

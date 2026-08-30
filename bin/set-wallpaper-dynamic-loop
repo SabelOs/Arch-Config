@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
 # Allow Hyprpaper to finish starting.
-sleep 3
+sleep 1
 
 while true; do
-    /home/soeke/Arch-Config/bin/set-dynamic-wallpaper
+    $HOME/Arch-Config/bin/set-dynamic-wallpaper
     sleep 60
 done
