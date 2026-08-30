@@ -255,6 +255,7 @@ install_aur_packages "$DOTFILES/packages/base-aur.txt"
 install_aur_packages "$DOTFILES/packages/$HOST-aur.txt"
 
 #enable elephant as a service for walker
+elephant service enable
 systemctl --user enable elephant
 systemctl --user start elephant
 
