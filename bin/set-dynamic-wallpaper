@@ -2,7 +2,16 @@
 
 set -u
 
-WALLPAPER_DIR="$HOME/Arch-Config/wallpaper/dynamic"
+if [[ -f "$HOME/.config/hypr/.host" ]]; then
+    export HOST=$(cat "$HOME/.config/hypr/.host")
+fi
+# Determine wallpaper directory based on HOST
+if [[ -n "$HOST" && -d "$HOME/Arch-Config/hosts/$HOST/wallpaper" ]]; then
+    WALLPAPER_DIR="$HOME/Arch-Config/hosts/$HOST/wallpaper"
+else
+    # Fallback to global wallpaper dir if host-specific one doesn't exist
+    WALLPAPER_DIR="$HOME/Arch-Config/wallpaper/dynamic"
+fi
 
 # Empty means all monitors. For a specific monitor, use e.g. "DP-1".
 MONITOR=""
