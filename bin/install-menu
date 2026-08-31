@@ -30,7 +30,7 @@ aur_menu() {
 
         [[ -z "$package" ]] && exit 0
 
-        yay -S "$package"
+        paru -S "$package"
 
         echo
         echo "Press Enter to close..."

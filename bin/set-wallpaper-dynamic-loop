@@ -3,7 +3,17 @@
 # Allow Hyprpaper to finish starting.
 sleep 3
 
+# Define the script path using $HOME
+SCRIPT_PATH="$HOME/Arch-Config/bin/set-dynamic-wallpaper"
+
+# Check if the script exists
+if [[ ! -f "$SCRIPT_PATH" ]]; then
+    echo "Error: $SCRIPT_PATH not found!" >&2
+    exit 1
+fi
+
+# Run the script every 60 seconds
 while true; do
-    /home/soeke/Arch-Config/bin/set-dynamic-wallpaper
+    "$SCRIPT_PATH"
     sleep 60
 done

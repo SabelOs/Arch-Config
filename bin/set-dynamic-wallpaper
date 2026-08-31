@@ -2,7 +2,7 @@
 
 set -u
 
-WALLPAPER_DIR="/home/soeke/Arch-Config/wallpaper/dynamic"
+WALLPAPER_DIR="$HOME/Arch-Config/wallpaper/dynamic"
 
 # Empty means all monitors. For a specific monitor, use e.g. "DP-1".
 MONITOR=""
