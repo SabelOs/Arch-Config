@@ -18,6 +18,10 @@ MONITOR=""
 
 STATE_FILE="${XDG_RUNTIME_DIR:-/tmp}/dynamic-hyprpaper-current"
 
+# Ensure the current wallpaper directory exists
+CURRENT_WALLPAPER_DIR="$HOME/.config/hypr/current-wallpaper"
+mkdir -p "$CURRENT_WALLPAPER_DIR"
+
 # An unmatched glob should expand to nothing.
 shopt -s nullglob
 
@@ -72,6 +76,11 @@ if [[ -f "$STATE_FILE" ]] &&
    [[ "$(<"$STATE_FILE")" == "$CURRENT_STATE" ]]; then
     exit 0
 fi
+
+# Copy the selected wallpaper to the shared location
+echo "Copying wallpaper to $CURRENT_WALLPAPER_DIR/wallpaper.jpg"
+cp -f "$WALLPAPER" "$CURRENT_WALLPAPER_DIR/wallpaper.jpg"
+
 
 echo "Date/time:  $(date '+%F %T')"
 echo "Frames:     $FRAME_COUNT"

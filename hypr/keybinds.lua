@@ -20,6 +20,7 @@ hl.bind(mainMod .. " + W", hl.dsp.window.close())
 hl.bind(mainMod .. " + T", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
 hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit"))
+hl.bind(mainMod .. " + SHIFT + L", hl.dsp.exec_cmd("pidof hyprlock || hyprlock"))
 
 hl.bind("CTRL + ALT + B", hl.dsp.exec_cmd("kitty-tui -e bluetui"))
 hl.bind("CTRL + ALT + P", hl.dsp.exec_cmd("kitty-tui -e btop"))
